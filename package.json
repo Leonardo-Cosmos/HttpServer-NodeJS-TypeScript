@@ -1,0 +1,47 @@
+{
+  "name": "httpserver-nodejs",
+  "description": "HTTP server of micro-service.",
+  "license": "MIT",
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/",
+    "test": "tsc && mocha dist/**/*.spec.js"
+  },
+  "version": "0.1.0",
+  "dependencies": {
+    "typescript": "4.6.2",
+    "@types/node": "^12.12.6",
+    "@types/mocha": "^5.2.5",
+    "@types/express": "~4.16.0",
+    "@types/restify-errors": "~4.3.4",
+    "@types/cors": "~2.8.4",
+    "@types/mongodb": "~3.1.17",
+    "@types/lodash": "~4.14.180",
+    "@types/uuid": "~8.3.4",
+    "express": "~4.16.4",
+    "restify-errors": "~6.1.1",
+    "cors": "~2.8.5",
+    "helmet": "^4.6.0",
+    "nocache": "^3.0.1",
+    "axios": "~0.21.0",
+    "redis": "^2.8.0",
+    "mongodb": "~3.1.13",
+    "rxjs": "^6.6.7",
+    "dotenv": "^6.2.0",
+    "pino": "^5.17.0",
+    "pino-pretty": "^3.2.0",
+    "lodash": "~4.17.11",
+    "uuid": "~8.3.2",
+    "moment-timezone": "~0.5.23"
+  },
+  "devDependencies": {
+    "chai": "~4.1.2",
+    "eslint": "~4.19.1"
+  }
+}
