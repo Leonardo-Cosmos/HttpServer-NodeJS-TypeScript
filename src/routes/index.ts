@@ -8,6 +8,7 @@ import {
   setReqLogger,
   setRequestHeader
 } from '../services/middlewares';
+import sampleRouter from '../business-sample/sample-router';
 
 const router = Router();
 
@@ -29,6 +30,7 @@ router.use(noCache());
  */
 router.get('/', (req, res) => res.send('Welcome!'));
 router.get('/_health', healthRouter);
+router.use('/sample/1.0', sampleRouter);
 
 router.use(pageNotFound());
 router.use(errorHandler());
