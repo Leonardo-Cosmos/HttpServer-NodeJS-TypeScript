@@ -42,7 +42,7 @@ export function errorHandler() {
 export function pageNotFound() {
   return (req: Request, res: Response, next: NextFunction) => {
     const _log = (req as any).log ?? logger;
-    _log.warn({ module: '_pageNotFound' }, 'The client is requesting for a missing page');
+    _log.warn({ module: '_pageNotFound' }, 'The client is requesting for a missing page: %s', req.url);
     next(new errors.NotFoundError('The resource does not exist'));
   };
 }
