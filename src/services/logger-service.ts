@@ -10,7 +10,7 @@ export function logError(err: any, log: any) {
   if (err instanceof Error) {
     log.error('%s', (errors as any).fullStack(err));
   } else {
-    log.erro('%j', err);
+    log.error('%j', err);
   }
 }
 
