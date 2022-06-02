@@ -46,8 +46,13 @@ export default {
     const _log = log.child({ module: MODULE, method: 'setString' });
     const client = await getRedisClient(_log);
 
-    _log.debug('SET %s %s', key, value);
-    const reply = await client.set(generateKey(key), value, { EX: expire });
+    _log.debug('SET %s %s, expire: %d', key, value, expire);
+    let reply;
+    if (expire && expire > 0) {
+      reply = await client.set(generateKey(key), value, { EX: expire });
+    } else {
+      reply = await client.set(generateKey(key), value);
+    }
     _log.debug('SET %s => %s', key, reply);
 
     return reply;
