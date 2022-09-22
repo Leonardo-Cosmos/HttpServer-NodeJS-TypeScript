@@ -1,4 +1,4 @@
-import { createClient } from 'redis';
+import { createClient, RedisClientOptions } from 'redis';
 import * as errors from 'restify-errors';
 import config from '../config/redis-config';
 import { sleepAsync } from './helper';
@@ -6,7 +6,7 @@ import logger, { logError } from './logger-service';
 
 const MODULE = 'redis';
 
-function buildReidsClientOptions() {
+function buildReidsClientOptions(): RedisClientOptions {
   const options: any = {};
   if (config.port) {
     options.socket ??= {};
@@ -19,10 +19,10 @@ function buildReidsClientOptions() {
   }
 
   if (config.username) {
-    options.usernaem = config.username;
+    options.username = config.username;
   }
 
-  if (config.password) {
+  if (config.password && config.password.length > 0) {
     options.password = config.password;
   }
 

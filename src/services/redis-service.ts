@@ -76,7 +76,9 @@ export default {
     const reply = await client.hSet(generateKey(key), field, value);
     _log.debug('HSET %s, %s => %s', key, field, reply);
 
-    await this.setExpire(key, expire, log);
+    if (expire && expire > 0) {
+      await this.setExpire(key, expire, log);
+    }
 
     return reply;
   },
@@ -102,6 +104,17 @@ export default {
     return reply;
   },
 
+  async getSetMembers(key: string, log: any) {
+    const _log = log.child({ module: MODULE, method: 'getSetMembers' });
+    const client = await getRedisClient(_log);
+
+    _log.debug('SMEMBERS %s', key)
+    const reply = await client.sMembers(generateKey(key));
+    _log.debug('SMEMBERS %s => %j', key, reply);
+
+    return reply;
+  },
+
   async addSetMember(key: string, value: string, expire: number, log: any) {
     const _log = log.child({ module: MODULE, method: 'addSetMember' });
     const client = await getRedisClient(_log);
@@ -110,7 +123,9 @@ export default {
     const reply = await client.sAdd(generateKey(key), value);
     _log.debug('SADD %s => %s', key, reply);
 
-    await this.setExpire(key, expire, log);
+    if (expire && expire > 0) {
+      await this.setExpire(key, expire, log);
+    }
 
     return reply;
   },
@@ -134,7 +149,9 @@ export default {
     const reply = await client.zAdd(generateKey(key), { score, value });
     _log.debug('ZADD %s => %s', key, reply);
 
-    await this.setExpire(key, expire, log);
+    if (expire && expire > 0) {
+      await this.setExpire(key, expire, log);
+    }
 
     return reply;
   },
