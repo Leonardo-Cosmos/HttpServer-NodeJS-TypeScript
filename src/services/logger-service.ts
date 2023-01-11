@@ -41,4 +41,10 @@ export function logExtraValues(log: any, msg: string, ...values: any[]) {
   }
 }
 
-export default Pino.default(config);
+const defaultLogger = Pino.default(config);
+
+export function getLogger() {
+  return defaultLogger;
+}
+
+export default defaultLogger;
