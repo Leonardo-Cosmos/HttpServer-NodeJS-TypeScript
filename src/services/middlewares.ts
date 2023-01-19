@@ -70,6 +70,13 @@ export function accept(fn: (req: Request & LoggerContainer) => void) {
   };
 }
 
+export function handle(fn: (req: Request & LoggerContainer, res: Response) => void) {
+  return (req: Request, res: Response, next: (err: Error | void) => void) => {
+    return Promise.resolve(fn(req as any, res))
+      .catch(err => { next(err); });
+  };
+}
+
 /**
  * You could customise the middleware to better fit the application's need.
  *
