@@ -116,7 +116,7 @@ export function setReqLogger() {
           statusMessage: res.statusMessage,
           headers: {
             contentType: res.get('content-type'),
-            contentLength: parseInt(res.get('content-length')) || 0,
+            contentLength: parseInt(res.get('content-length') || '0'),
           }
         }
       }, 'Express sent response');
