@@ -1,5 +1,5 @@
 import * as errors from 'restify-errors';
-import { SampleRequest, SampleResponse } from "./models/sample-model";
+import { SampleRequest, SampleResponse } from "./models/rest-model";
 
 
 const MODULE = 'sample/controller';

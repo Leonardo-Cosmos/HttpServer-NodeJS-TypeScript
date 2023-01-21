@@ -8,7 +8,7 @@ import {
   setReqLogger,
   setRequestHeader
 } from '../services/middlewares';
-import sampleRouter from '../business-sample/sample-router';
+import restRouter from '../business-sample/rest-api/rest-api-router';
 
 const router = Router();
 
@@ -30,7 +30,7 @@ router.use(noCache());
  */
 router.get('/', (req, res) => res.send('Welcome!'));
 router.get('/_health', healthRouter);
-router.use('/sample/1.0', sampleRouter);
+router.use('/rest/1.0', restRouter);
 
 router.use(pageNotFound());
 router.use(errorHandler());

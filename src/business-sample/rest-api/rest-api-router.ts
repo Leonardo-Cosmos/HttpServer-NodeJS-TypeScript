@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import {
   reply,
-} from '../services/middlewares';
+} from '../../services/middlewares';
 import {
   handleSample
-} from './sample-controller';
+} from './rest-api-controller';
 const MODULE = 'sample/router';
 
 const router = Router();
