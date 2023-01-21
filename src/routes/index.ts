@@ -9,6 +9,8 @@ import {
   setRequestHeader
 } from '../services/middlewares';
 import restRouter from '../business-sample/rest-api/rest-api-router';
+import webFrontendRouter from '../business-sample/web-frontend/web-frontend-router';
+import webBackendRouter from '../business-sample/web-backend/web-backend-router';
 
 const router = Router();
 
@@ -31,6 +33,8 @@ router.use(noCache());
 router.get('/', (req, res) => res.send('Welcome!'));
 router.get('/_health', healthRouter);
 router.use('/rest/1.0', restRouter);
+router.use('/web-frontend', webFrontendRouter);
+router.use('/web-backend', webBackendRouter);
 
 router.use(pageNotFound());
 router.use(errorHandler());

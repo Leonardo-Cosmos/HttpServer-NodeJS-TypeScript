@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login</title>
+
+  <script src="js/jquery-3.6.3.min.js"></script>
+  <script src="js/login.js"></script>
+
+</head>
+
+<body>
+  <form method="post" action="/web-backend/session/login">
+    <div>
+      <input type="text" id="txtbxUsername" name="username" placeholder="Username" />
+      <label for="txtbxUsername">
+        Username
+      </label>
+    </div>
+    <div>
+      <input type="text" id="txtbxPassword" name="password" placeholder="Password" />
+      <label for="txtbxPassword">
+        Password
+      </label>
+    </div>
+
+    <input type="hidden" id="hdnForwardUrl" name="forwardUrl" value="/web-frontend/welcome.html" />
+    <input type="hidden" id="hdnFallbackUrl" name="fallbackUrl" value="/web-frontend/login.html" />
+
+    <div>
+      <button type="submit">
+        <span>Sign In</span>
+      </button>
+    </div>
+  </form>
+</body>
+
+</html>
