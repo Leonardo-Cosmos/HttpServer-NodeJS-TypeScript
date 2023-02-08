@@ -12,6 +12,17 @@ import restRouter from '../business-sample/rest-api/rest-api-router';
 import webFrontendRouter from '../business-sample/web-frontend/web-frontend-router';
 import webBackendRouter from '../business-sample/web-backend/web-backend-router';
 
+import { promises as fsPromise } from 'fs';
+fsPromise.opendir('../business-sample').then(async dir => {
+  for await (const dirent of dir) {
+    if (dirent.isDirectory()) {
+      console.log(dirent.name);
+      import middleware from `../business-sample/${dirent.name}`;
+    }
+  }
+});
+
+
 const router = Router();
 
 /**
