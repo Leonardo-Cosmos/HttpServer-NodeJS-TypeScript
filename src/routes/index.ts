@@ -9,7 +9,6 @@ import {
   setReqLogger,
   setRequestHeader
 } from '../services/middlewares';
-import '../business-sample/rest-api';
 import webFrontendRouter from '../business-sample/web-frontend/web-frontend-router';
 import webBackendRouter from '../business-sample/web-backend/web-backend-router';
 import { RouterHandler } from './router-handler';

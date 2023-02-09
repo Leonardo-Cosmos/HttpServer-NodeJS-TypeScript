@@ -1,4 +1,4 @@
-import { container } from "tsyringe";
+import { container, registry } from "tsyringe";
 import router from './rest-api-router';
 import { RouterHandler } from '../../routes/router-handler';
 
@@ -7,6 +7,13 @@ const routerHandler: RouterHandler = {
   handler: router,
 };
 
-container.register("RouterHandler", { useValue: routerHandler });
+// container.register("RouterHandler", { useValue: routerHandler });
+
+@registry([
+  {
+    token: "RouterHandler", useValue: routerHandler
+  }
+])
+class RegisterClass { }
 
 export default routerHandler;
