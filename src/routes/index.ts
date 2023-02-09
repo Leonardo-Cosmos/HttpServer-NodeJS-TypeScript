@@ -1,6 +1,7 @@
 import helmet from 'helmet';
 import noCache from 'nocache';
 import { Router } from 'express';
+import { container } from "tsyringe";
 import healthRouter from './health';
 import {
   errorHandler,
@@ -8,20 +9,10 @@ import {
   setReqLogger,
   setRequestHeader
 } from '../services/middlewares';
-import restRouter from '../business-sample/rest-api/rest-api-router';
+import '../business-sample/rest-api';
 import webFrontendRouter from '../business-sample/web-frontend/web-frontend-router';
 import webBackendRouter from '../business-sample/web-backend/web-backend-router';
-
-import { promises as fsPromise } from 'fs';
-fsPromise.opendir('../business-sample').then(async dir => {
-  for await (const dirent of dir) {
-    if (dirent.isDirectory()) {
-      console.log(dirent.name);
-      import middleware from `../business-sample/${dirent.name}`;
-    }
-  }
-});
-
+import { RouterHandler } from './router-handler';
 
 const router = Router();
 
@@ -43,9 +34,14 @@ router.use(noCache());
  */
 router.get('/', (req, res) => res.send('Welcome!'));
 router.get('/_health', healthRouter);
-router.use('/rest/1.0', restRouter);
 router.use('/web-frontend', webFrontendRouter);
 router.use('/web-backend', webBackendRouter);
+
+const handlers = container.resolveAll("RouterHandler");
+for (const handler of handlers) {
+  const routerHandler = handler as RouterHandler;
+  router.use(routerHandler.path, routerHandler.handler);
+}
 
 router.use(pageNotFound());
 router.use(errorHandler());
