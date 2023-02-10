@@ -1,13 +1,11 @@
 import { registry } from "tsyringe";
-import router from './rest-api-router';
+import router from './web-frontend-router';
 import { RouterHandler } from '../../routes/router-handler';
 
 const routerHandler: RouterHandler = {
-  path: '/rest/1.0',
+  path: '/web-frontend',
   handler: router,
 };
-
-// container.register("RouterHandler", { useValue: routerHandler });
 
 @registry([
   {
