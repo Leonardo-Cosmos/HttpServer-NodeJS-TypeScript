@@ -1,17 +1,9 @@
-import { registry } from "tsyringe";
+import { container } from "tsyringe";
 import router from './web-frontend-router';
 import { RouterHandler } from '../../routes/router-handler';
 
-const routerHandler: RouterHandler = {
-  path: '/web-frontend',
-  handler: router,
-};
+const routerHandler = new RouterHandler('/web-frontend', router);
 
-@registry([
-  {
-    token: "RouterHandler", useValue: routerHandler
-  }
-])
-class RegisterClass { }
+container.register<RouterHandler>(RouterHandler, { useValue: routerHandler });
 
 export default routerHandler;

@@ -2,6 +2,7 @@ import helmet from 'helmet';
 import noCache from 'nocache';
 import { Router } from 'express';
 import { container } from "tsyringe";
+import { RouterHandler } from './router-handler';
 import healthRouter from './health';
 import {
   errorHandler,
@@ -9,9 +10,9 @@ import {
   setReqLogger,
   setRequestHeader
 } from '../services/middlewares';
-import webFrontendRouter from '../business-sample/web-frontend/web-frontend-router';
-import webBackendRouter from '../business-sample/web-backend/web-backend-router';
-import { RouterHandler } from './router-handler';
+import '../business-sample/rest-api';
+import '../business-sample/web-frontend';
+import '../business-sample/web-backend';
 
 const router = Router();
 
@@ -33,12 +34,9 @@ router.use(noCache());
  */
 router.get('/', (req, res) => res.send('Welcome!'));
 router.get('/_health', healthRouter);
-router.use('/web-frontend', webFrontendRouter);
-router.use('/web-backend', webBackendRouter);
 
-const handlers = container.resolveAll("RouterHandler");
-for (const handler of handlers) {
-  const routerHandler = handler as RouterHandler;
+const routerHandlers = container.resolveAll(RouterHandler);
+for (const routerHandler of routerHandlers) {
   router.use(routerHandler.path, routerHandler.handler);
 }
 
